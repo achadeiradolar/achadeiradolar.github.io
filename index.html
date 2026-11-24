@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achadeira do Lar — achadinhos para casa</title>
+<meta name="description" content="Achadinhos para casa, cozinha e organização. Encontre aqui o produto pelo número que apareceu no post.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<style>
+  :root{--bg:#fbf6f0;--card:#fff;--ink:#2b2420;--muted:#7a6d64;--brand:#c8553d;--brand-ink:#fff;--line:#eadfd4;--chip:#f3e7dc}
+  @media (prefers-color-scheme: dark){:root{--bg:#1c1816;--card:#26211e;--ink:#f3ebe4;--muted:#b3a79d;--brand:#e07a5f;--brand-ink:#1c1816;--line:#3a322d;--chip:#332b26}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  header{padding:28px 16px 12px;text-align:center}
+  .logo{width:72px;height:72px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-size:36px;margin:0 auto 10px}
+  h1{margin:0;font-size:1.6rem}
+  .sub{color:var(--muted);margin:4px 0 0}
+  .disc{max-width:680px;margin:12px auto 0;font-size:.82rem;color:var(--muted)}
+  .search{max-width:680px;margin:16px auto;padding:0 16px}
+  .search input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:1rem}
+  main{max-width:960px;margin:0 auto;padding:0 16px 40px;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .card img{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--chip)}
+  .body{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .num{font-weight:700;color:var(--brand)}
+  .title{font-size:.95rem;margin:0}
+  .meta{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
+  .price{font-weight:700;color:var(--ink);font-size:1.05rem}
+  .btn{margin-top:auto;display:block;text-align:center;background:var(--brand);color:var(--brand-ink);text-decoration:none;padding:11px;border-radius:12px;font-weight:600}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0}
+  footer{text-align:center;font-size:.82rem;color:var(--muted);padding:0 16px 32px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-hidden="true">🏠</div>
+  <h1>Achadeira do Lar</h1>
+  <p class="sub">Achadinhos para casa, cozinha e organização</p>
+  <p class="disc">Esta página contém links de afiliado da Shopee e do Mercado Livre: se você comprar por eles, posso receber uma comissão, sem custo extra para você. Preços e estoque podem mudar a qualquer momento.</p>
+</header>
+<div class="search"><input id="q" type="search" inputmode="search" placeholder="Digite o número do post ou o nome do produto" aria-label="Buscar produto"></div>
+<main id="grid"><p class="empty">Carregando achadinhos…</p></main>
+<footer>
+  <a href="privacidade.html">Política de Privacidade</a> · <a href="termos.html">Termos de Uso</a>
+</footer>
+<script>
+const grid = document.getElementById('grid');
+const q = document.getElementById('q');
+let items = [];
+const fmt = v => typeof v === 'number' ? v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) : (v || '');
+function esc(s){return String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+  const t = q.value.trim().toLowerCase().replace(/^#/,'');
+  const list = items.filter(p => !t || String(p.id) === t || (p.titulo||'').toLowerCase().includes(t));
+  if(!list.length){grid.innerHTML = `<p class="empty">${items.length ? 'Nenhum produto encontrado.' : 'Em breve os primeiros achadinhos aparecem aqui ✨'}</p>`;return}
+  grid.innerHTML = list.map(p => `
+    <article class="card">
+      <img src="${esc(p.imagem)}" alt="${esc(p.titulo)}" loading="lazy">
+      <div class="body">
+        <span class="num">#${esc(p.id)}</span>
+        <h2 class="title">${esc(p.titulo)}</h2>
+        <div class="meta"><span class="price">${esc(fmt(p.preco))}</span><span>${esc(p.loja)}</span></div>
+        <a class="btn" href="${esc(p.link)}" target="_blank" rel="sponsored noopener">Ver na ${esc(p.loja)}</a>
+      </div>
+    </article>`).join('');
+}
+fetch('produtos.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{items=(d.produtos||[]).slice().reverse();render()}).catch(()=>{render()});
+q.addEventListener('input',render);
+const h = location.hash.replace('#',''); if(h){q.value=h}
+</script>
+</body>
+</html>

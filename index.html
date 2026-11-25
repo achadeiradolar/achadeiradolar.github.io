@@ -52,7 +52,7 @@ const fmt = v => typeof v === 'number' ? v.toLocaleString('pt-BR',{style:'curren
 function esc(s){return String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function render(){
   const t = q.value.trim().toLowerCase().replace(/^#/,'');
-  const list = items.filter(p => !t || String(p.id) === t || (p.titulo||'').toLowerCase().includes(t));
+  const list = items.filter(p => !t || (/^\d+$/.test(t) && Number(p.id) === Number(t)) || (p.titulo||'').toLowerCase().includes(t));
   if(!list.length){grid.innerHTML = `<p class="empty">${items.length ? 'Nenhum produto encontrado.' : 'Em breve os primeiros achadinhos aparecem aqui ✨'}</p>`;return}
   grid.innerHTML = list.map(p => `
     <article class="card">

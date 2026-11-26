@@ -1,4 +1,50 @@
 {
-  "atualizado_em": "2026-11-24",
-  "produtos": []
+  "atualizado_em": "2026-11-25",
+  "produtos": [
+    {
+      "id": "01",
+      "titulo": "Kit 4 Potes Herméticos com Tampa Estilo Bambu",
+      "preco": 38.99,
+      "loja": "Shopee",
+      "link": "https://s.shopee.com.br/8pncBDJlze",
+      "imagem": "https://achadeiradolar.github.io/midia/lote-001/01/carrossel_1.jpg",
+      "publicado_em": "2026-11-25"
+    },
+    {
+      "id": "02",
+      "titulo": "Porta Frios Duplo com Fundo Removível",
+      "preco": 17.53,
+      "loja": "Shopee",
+      "link": "https://s.shopee.com.br/3g5W1kL6VQ",
+      "imagem": "https://achadeiradolar.github.io/midia/lote-001/02/carrossel_1.jpg",
+      "publicado_em": "2026-11-25"
+    },
+    {
+      "id": "03",
+      "titulo": "Porta Ovos Rolante 4 Andares (até 30 ovos)",
+      "preco": 13.96,
+      "loja": "Shopee",
+      "link": "https://s.shopee.com.br/AUvqAJLYam",
+      "imagem": "https://achadeiradolar.github.io/midia/lote-001/03/carrossel_1.jpg",
+      "publicado_em": "2026-11-25"
+    },
+    {
+      "id": "04",
+      "titulo": "Kit 12 Utensílios de Silicone com Cabo de Madeira e Suporte",
+      "preco": 41.9,
+      "loja": "Mercado Livre",
+      "link": "https://meli.la/1xBript",
+      "imagem": "https://achadeiradolar.github.io/midia/lote-001/04/carrossel_1.jpg",
+      "publicado_em": "2026-11-25"
+    },
+    {
+      "id": "05",
+      "titulo": "Kit 10 Sacos a Vácuo 40x60 cm com Bomba",
+      "preco": 41.99,
+      "loja": "Mercado Livre",
+      "link": "https://meli.la/2nu3GYG",
+      "imagem": "https://achadeiradolar.github.io/midia/lote-001/05/carrossel_1.jpg",
+      "publicado_em": "2026-11-25"
+    }
+  ]
 }
